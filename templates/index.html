@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PyManage - Employee Management Portal</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 70%;
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0,123,255,0.2);
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        table th {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #b52a37;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+
+            .container {
+                width: 100%;
+            }
+
+            form {
+                flex-direction: column;
+            }
+
+            .add-btn {
+                width: 100%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>PyManage - Employee Management Portal</h1>
+        </div>
+
+        <div class="content">
+
+            <form action="/add" method="POST">
+
+                <input
+                    type="text"
+                    name="employee_name"
+                    placeholder="Enter Employee Name"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="add-btn"
+                >
+                    Add Employee
+                </button>
+
+            </form>
+
+            {% if employees %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Employee Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for employee in employees %}
+
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ employee }}</td>
+
+                        <td>
+                            <a
+                                href="/delete/{{ loop.index0 }}"
+                                class="delete-btn"
+                            >
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty-state">
+                No employees added yet.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="footer">
+            © 2026 PyManage | Employee Management Portal
+        </div>
+
+    </div>
+
+</body>
+</html>
