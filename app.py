@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
 
-print("Starting App...")
-
 app = Flask(__name__)
 
 employees = []
@@ -32,5 +30,8 @@ def delete_employee(index):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    print("Running Flask Server...")
-    app.run(debug=True)
+    app.run(
+        host='0.0.0.0',
+        port=5000,
+        debug=True
+    )
